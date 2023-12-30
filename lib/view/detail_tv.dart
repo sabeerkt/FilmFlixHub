@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:movie/constant/api_key.dart';
 import 'package:movie/model/mov_model.dart';
 
-class DetailPage extends StatelessWidget {
-  DetailPage({Key? key, required this.movie}) : super(key: key);
+class DetailPageTv extends StatelessWidget {
+  DetailPageTv({Key? key, required this.movie}) : super(key: key);
   final Movie movie;
 
   @override
@@ -32,7 +32,7 @@ class DetailPage extends StatelessWidget {
             floating: true,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
-                movie.title ?? 'No Title',
+                movie.name ?? 'No Title',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

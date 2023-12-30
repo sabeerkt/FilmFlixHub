@@ -5,8 +5,14 @@ import 'package:movie/model/mov_model.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
+  static const popullar =
+      'https://api.themoviedb.org/3/tv/popular?api_key=aa9a8a205c0591e06a5292b3c1835f3a';
   static const toprated =
       'https://api.themoviedb.org/3/movie/top_rated?api_key=aa9a8a205c0591e06a5292b3c1835f3a';
+  static const topratedTv =
+      'https://api.themoviedb.org/3/tv/top_rated?api_key=aa9a8a205c0591e06a5292b3c1835f3a';
+  static const airtvshow =
+      'https://api.themoviedb.org/3/tv/on_the_air?api_key=aa9a8a205c0591e06a5292b3c1835f3a';
 
   static const trendingurl =
       'https://api.themoviedb.org/3/trending/movie/day?api_key=aa9a8a205c0591e06a5292b3c1835f3a';
@@ -16,6 +22,39 @@ class Api {
 
   Future<List<Movie>> getTrending() async {
     final response = await http.get(Uri.parse(trendingurl));
+    if (response.statusCode == 200) {
+      final decodedata = json.decode(response.body)['results'] as List;
+      print(decodedata);
+      return decodedata.map((mov) => Movie.fromJson(mov)).toList();
+    } else {
+      throw Exception("somthing happen");
+    }
+  }
+
+  Future<List<Movie>> getairtvshow() async {
+    final response = await http.get(Uri.parse(airtvshow));
+    if (response.statusCode == 200) {
+      final decodedata = json.decode(response.body)['results'] as List;
+      print(decodedata);
+      return decodedata.map((mov) => Movie.fromJson(mov)).toList();
+    } else {
+      throw Exception("somthing happen");
+    }
+  }
+
+  Future<List<Movie>> gettopratedTv() async {
+    final response = await http.get(Uri.parse(topratedTv));
+    if (response.statusCode == 200) {
+      final decodedata = json.decode(response.body)['results'] as List;
+      print(decodedata);
+      return decodedata.map((mov) => Movie.fromJson(mov)).toList();
+    } else {
+      throw Exception("somthing happen");
+    }
+  }
+
+  Future<List<Movie>> getpopullar() async {
+    final response = await http.get(Uri.parse(popullar));
     if (response.statusCode == 200) {
       final decodedata = json.decode(response.body)['results'] as List;
       print(decodedata);

@@ -3,6 +3,7 @@ import 'package:movie/api/api.dart';
 import 'package:movie/model/mov_model.dart';
 import 'package:movie/widgets/CarouselSlider.dart';
 import 'package:movie/widgets/movie_card.dart';
+import 'package:movie/widgets/text.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -28,8 +29,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Movie"),
-        centerTitle: true,
+        title: const AnimatedText(),
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -37,9 +37,11 @@ class _HomeState extends State<Home> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Trending ",
-              style: TextStyle(fontSize: 25),
+            const Center(
+              child: Text(
+                "Trending ",
+                style: TextStyle(fontSize: 25),
+              ),
             ),
             SizedBox(
               child: FutureBuilder(
