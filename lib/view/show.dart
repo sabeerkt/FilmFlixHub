@@ -1,6 +1,6 @@
 // show.dart
 import 'package:flutter/material.dart';
-import 'package:movie/api/api.dart';
+import 'package:movie/services/api.dart';
 import 'package:movie/model/mov_model.dart';
 import 'package:movie/widgets/show_card.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie/api/api.dart';
+import 'package:movie/services/api.dart';
 import 'package:movie/model/mov_model.dart';
 import 'package:movie/widgets/CarouselSlider.dart';
 import 'package:movie/widgets/movie_card.dart';

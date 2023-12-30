@@ -1,29 +1,13 @@
 import 'dart:convert';
 
+import 'package:movie/constant/api_key.dart';
 import 'package:movie/model/mov_model.dart';
-import 'package:movie/model/mov_model.dart';
+
 import 'package:http/http.dart' as http;
 
 class Api {
-  static const popullar =
-      'https://api.themoviedb.org/3/tv/popular?api_key=aa9a8a205c0591e06a5292b3c1835f3a';
-      static const show =
-      'https://api.themoviedb.org/3/tv/popular?api_key=aa9a8a205c0591e06a5292b3c1835f3a';
-  static const toprated =
-      'https://api.themoviedb.org/3/movie/top_rated?api_key=aa9a8a205c0591e06a5292b3c1835f3a';
-  static const topratedTv =
-      'https://api.themoviedb.org/3/tv/top_rated?api_key=aa9a8a205c0591e06a5292b3c1835f3a';
-  static const airtvshow =
-      'https://api.themoviedb.org/3/tv/on_the_air?api_key=aa9a8a205c0591e06a5292b3c1835f3a';
-
-  static const trendingurl =
-      'https://api.themoviedb.org/3/trending/movie/day?api_key=aa9a8a205c0591e06a5292b3c1835f3a';
-
-  static const upcoming =
-      'https://api.themoviedb.org/3/discover/movie?primary_release_year=2024&api_key=aa9a8a205c0591e06a5292b3c1835f3a';
-
   Future<List<Movie>> getTrending() async {
-    final response = await http.get(Uri.parse(trendingurl));
+    final response = await http.get(Uri.parse(Constants.trendingurl));
     if (response.statusCode == 200) {
       final decodedata = json.decode(response.body)['results'] as List;
       print(decodedata);
@@ -32,8 +16,9 @@ class Api {
       throw Exception("somthing happen");
     }
   }
-   Future<List<Movie>> getshow() async {
-    final response = await http.get(Uri.parse(show));
+
+  Future<List<Movie>> getshow() async {
+    final response = await http.get(Uri.parse(Constants.show));
     if (response.statusCode == 200) {
       final decodedata = json.decode(response.body)['results'] as List;
       print(decodedata);
@@ -44,7 +29,7 @@ class Api {
   }
 
   Future<List<Movie>> getairtvshow() async {
-    final response = await http.get(Uri.parse(airtvshow));
+    final response = await http.get(Uri.parse(Constants.airtvshow));
     if (response.statusCode == 200) {
       final decodedata = json.decode(response.body)['results'] as List;
       print(decodedata);
@@ -55,7 +40,7 @@ class Api {
   }
 
   Future<List<Movie>> gettopratedTv() async {
-    final response = await http.get(Uri.parse(topratedTv));
+    final response = await http.get(Uri.parse(Constants.topratedTv));
     if (response.statusCode == 200) {
       final decodedata = json.decode(response.body)['results'] as List;
       print(decodedata);
@@ -66,7 +51,7 @@ class Api {
   }
 
   Future<List<Movie>> getpopullar() async {
-    final response = await http.get(Uri.parse(popullar));
+    final response = await http.get(Uri.parse(Constants.popullar));
     if (response.statusCode == 200) {
       final decodedata = json.decode(response.body)['results'] as List;
       print(decodedata);
@@ -77,7 +62,7 @@ class Api {
   }
 
   Future<List<Movie>> getToprated() async {
-    final response = await http.get(Uri.parse(toprated));
+    final response = await http.get(Uri.parse(Constants.toprated));
     print(response.statusCode);
     if (response.statusCode == 200) {
       final decodedata = json.decode(response.body)['results'] as List;
@@ -89,7 +74,7 @@ class Api {
   }
 
   Future<List<Movie>> getUpcoming() async {
-    final response = await http.get(Uri.parse(upcoming));
+    final response = await http.get(Uri.parse(Constants.upcoming));
     if (response.statusCode == 200) {
       final decodedata = json.decode(response.body)['results'] as List;
       print(decodedata);

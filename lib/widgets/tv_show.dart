@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie/constant/api_key.dart';
 import 'package:movie/model/mov_model.dart';
-import 'package:movie/view/detail.dart';
+
 import 'package:movie/view/detail_tv.dart';
 
 class tvCard extends StatelessWidget {
