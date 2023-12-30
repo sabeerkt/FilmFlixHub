@@ -59,7 +59,7 @@ class tvCard extends StatelessWidget {
                         width: 200,
                         child: Center(
                           child: Text(
-                            snapshot.data[index].title, // Add movie name here
+                            snapshot.data[index].name, // Add movie name here
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               fontSize: 14,

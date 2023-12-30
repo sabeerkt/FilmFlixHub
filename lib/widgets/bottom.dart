@@ -18,7 +18,7 @@ class _BottomBarState extends State<BottomBar> {
     const Home(),
     const search(),
     const tV(),
-    const show(),
+     ShowPage(),
   ];
 
   @override

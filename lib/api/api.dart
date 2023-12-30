@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 class Api {
   static const popullar =
       'https://api.themoviedb.org/3/tv/popular?api_key=aa9a8a205c0591e06a5292b3c1835f3a';
+      static const show =
+      'https://api.themoviedb.org/3/tv/popular?api_key=aa9a8a205c0591e06a5292b3c1835f3a';
   static const toprated =
       'https://api.themoviedb.org/3/movie/top_rated?api_key=aa9a8a205c0591e06a5292b3c1835f3a';
   static const topratedTv =
@@ -22,6 +24,16 @@ class Api {
 
   Future<List<Movie>> getTrending() async {
     final response = await http.get(Uri.parse(trendingurl));
+    if (response.statusCode == 200) {
+      final decodedata = json.decode(response.body)['results'] as List;
+      print(decodedata);
+      return decodedata.map((mov) => Movie.fromJson(mov)).toList();
+    } else {
+      throw Exception("somthing happen");
+    }
+  }
+   Future<List<Movie>> getshow() async {
+    final response = await http.get(Uri.parse(show));
     if (response.statusCode == 200) {
       final decodedata = json.decode(response.body)['results'] as List;
       print(decodedata);
