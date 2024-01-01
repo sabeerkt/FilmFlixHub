@@ -47,4 +47,22 @@ class Api {
   Future<List<Movie>> getUpcoming() async {
     return fetchData(Constants.upcoming);
   }
+   Future<List<Movie>> searchMovie({required searchurl}) async {
+    try {
+      final response = await dio.get(searchurl);
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> searchdata = response.data;
+        final List<dynamic> searchmovies = searchdata["results"];
+        return searchmovies
+            .map((search) => Movie.fromJson(search))
+            .toList();
+      } else {
+        print('function error');
+        return [];
+      }
+    } catch (e) {
+      print("unable to fetch data:-${e}");
+      return [];
+    }
+  }
 }

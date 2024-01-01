@@ -7,14 +7,9 @@ import 'package:movie/model/mov_model.dart';
 import 'package:movie/widgets/show_card.dart';
 import 'package:provider/provider.dart';
 
-class ShowPage extends StatefulWidget {
+class ShowPage extends StatelessWidget {
   ShowPage({Key? key}) : super(key: key);
 
-  @override
-  State<ShowPage> createState() => _ShowPageState();
-}
-
-class _ShowPageState extends State<ShowPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -6,14 +6,9 @@ import 'package:movie/model/mov_model.dart';
 import 'package:movie/widgets/tv_show.dart';
 import 'package:provider/provider.dart';
 
-class tV extends StatefulWidget {
+class tV extends StatelessWidget {
   const tV({Key? key}) : super(key: key);
 
-  @override
-  State<tV> createState() => _tVState();
-}
-
-class _tVState extends State<tV> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

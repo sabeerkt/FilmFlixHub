@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movie/controller/api_provider.dart';
 import 'package:movie/controller/bottm_provider.dart';
+import 'package:movie/controller/search_provider.dart';
 import 'package:movie/view/onbording.dart';
-import 'package:movie/widgets/bottom.dart';
+
 import 'package:provider/provider.dart';
 
 void main() {
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => BottomBarProvider(),
+        ),
+         ChangeNotifierProvider(
+          create: (context) => SearchProvider(),
         ),
       ],
       child: MaterialApp(

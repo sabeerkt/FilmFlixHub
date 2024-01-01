@@ -16,7 +16,7 @@ class BottomBarContent extends StatelessWidget {
         index: provider.currentIndex,
         children: [
           Home(),
-          search(),
+          SearchScreen(),
           tV(),
           ShowPage(),
         ],
@@ -25,8 +25,8 @@ class BottomBarContent extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         currentIndex: provider.currentIndex,
         onTap: (i) => provider.setIndex(i),
-        backgroundColor: Color.fromARGB(255, 58, 54, 54),
-        selectedItemColor: const Color.fromARGB(255, 243, 51, 33),
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        selectedItemColor: Color.fromARGB(255, 33, 121, 243),
         unselectedItemColor: const Color.fromARGB(255, 255, 255, 255),
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         items: const [
