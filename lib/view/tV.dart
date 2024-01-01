@@ -18,8 +18,17 @@ class _tVState extends State<tV> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("TV"),
         backgroundColor: Colors.black,
+        title: Text(
+          "Tv",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.2,
+          ),
+        ),
+        centerTitle: true,
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -34,7 +43,8 @@ class _tVState extends State<tV> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("Popular TV Shows", style: TextStyle(color: Colors.white)),
+              const Text("Popular TV Shows",
+                  style: TextStyle(color: Colors.white)),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
@@ -62,7 +72,8 @@ class _tVState extends State<tV> {
                   ),
                 ),
               ),
-              const Text("Top Rated TV Shows", style: TextStyle(color: Colors.white)),
+              const Text("Top Rated TV Shows",
+                  style: TextStyle(color: Colors.white)),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
@@ -90,7 +101,8 @@ class _tVState extends State<tV> {
                   ),
                 ),
               ),
-              const Text("On the Air TV Shows", style: TextStyle(color: Colors.white)),
+              const Text("On the Air TV Shows",
+                  style: TextStyle(color: Colors.white)),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(

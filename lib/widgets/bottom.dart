@@ -6,9 +6,6 @@ import 'package:movie/view/show.dart';
 import 'package:movie/view/tV.dart';
 import 'package:provider/provider.dart';
 
-
-
-
 class BottomBarContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,7 +14,7 @@ class BottomBarContent extends StatelessWidget {
     return Scaffold(
       body: IndexedStack(
         index: provider.currentIndex,
-        children:  [
+        children: [
           Home(),
           search(),
           tV(),
@@ -28,9 +25,9 @@ class BottomBarContent extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         currentIndex: provider.currentIndex,
         onTap: (i) => provider.setIndex(i),
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
+        backgroundColor: Color.fromARGB(255, 58, 54, 54),
+        selectedItemColor: const Color.fromARGB(255, 243, 51, 33),
+        unselectedItemColor: const Color.fromARGB(255, 255, 255, 255),
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         items: const [
           BottomNavigationBarItem(

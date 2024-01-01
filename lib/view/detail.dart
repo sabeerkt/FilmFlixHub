@@ -9,96 +9,156 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            leading: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Container(
-                height: 70,
-                width: 70,
-                margin: const EdgeInsets.only(top: 16, left: 8),
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(Icons.arrow_back),
-              ),
-            ),
-            expandedHeight: 500,
-            pinned: true,
-            floating: true,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text(
-                movie.title ?? 'No Title',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              background: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(24),
-                  bottomRight: Radius.circular(24),
-                ),
-                child: Image.network(
-                  "${Constants.imagepath}${movie.backDropPath}",
-                  filterQuality: FilterQuality.high,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.pink, Colors.black],
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Overview",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+        ),
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              leading: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  height: 70,
+                  width: 70,
+                  margin: const EdgeInsets.only(top: 16, left: 8),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  const SizedBox(height: 10),
-                  Text(
-                    movie.overview ?? "No review",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Release Date: ${movie.releaseDate ?? "Unknown"}",
-                        style: TextStyle(fontSize: 14),
+                  child: const Icon(Icons.arrow_back),
+                ),
+              ),
+              expandedHeight: 500,
+              pinned: true,
+              floating: true,
+              flexibleSpace: FlexibleSpaceBar(
+                title: Text(
+                  movie.title ?? 'No Title',
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(
+                        offset: Offset(2.0, 2.0),
+                        blurRadius: 5.0,
+                        color: Colors.black,
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            "Rating: ",
-                            style: TextStyle(fontSize: 14),
-                          ),
-                          Icon(Icons.star, color: Colors.amber),
-                          Text(
-                            "${movie.voteAverage?.toStringAsFixed(1)}/10",
-                            style: TextStyle(fontSize: 14),
+                    ],
+                  ),
+                ),
+                background: ClipRRect(
+                  child: Image.network(
+                    "${Constants.imagepath}${movie.backDropPath}",
+                    filterQuality: FilterQuality.high,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Overview",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            offset: Offset(2.0, 2.0),
+                            blurRadius: 5.0,
+                            color: Colors.black,
                           ),
                         ],
                       ),
-                      
-                    ],
-                  ),
-                ],
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      movie.overview ?? "No review",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            offset: Offset(1.0, 1.0),
+                            blurRadius: 3.0,
+                            color: Colors.black,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Release Date: ${movie.releaseDate ?? "Unknown"}",
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            shadows: [
+                              Shadow(
+                                offset: Offset(1.0, 1.0),
+                                blurRadius: 3.0,
+                                color: Colors.black,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            const Text(
+                              "Rating: ",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                shadows: [
+                                  Shadow(
+                                    offset: Offset(1.0, 1.0),
+                                    blurRadius: 3.0,
+                                    color: Colors.black,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Icon(Icons.star,
+                                color: Colors.amber, size: 20),
+                            Text(
+                              "${movie.voteAverage?.toStringAsFixed(1)}/10",
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                shadows: [
+                                  Shadow(
+                                    offset: Offset(1.0, 1.0),
+                                    blurRadius: 3.0,
+                                    color: Colors.black,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-            
-          )
-        ],
+          ],
+        ),
       ),
     );
   }

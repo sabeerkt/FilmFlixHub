@@ -7,13 +7,15 @@ class AnimatedText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 250.0,
+      width: 350.0,
       child: DefaultTextStyle(
-        style: TextStyle(
-          fontSize: 20.0,
-          color: const Color.fromARGB(
-              255, 255, 255, 255), // Set the text color to black
-          fontWeight: FontWeight.bold, // You can adjust the font weight
+        style: const TextStyle(
+          fontSize: 30,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 1.2,
+          color:
+              Color.fromARGB(255, 255, 255, 255), // Set the text color to black
+          // You can adjust the font weight
         ),
         child: AnimatedTextKit(
           animatedTexts: [
