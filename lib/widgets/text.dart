@@ -11,7 +11,8 @@ class AnimatedText extends StatelessWidget {
       child: DefaultTextStyle(
         style: TextStyle(
           fontSize: 20.0,
-          color: Colors.black, // Set the text color to black
+          color: const Color.fromARGB(
+              255, 255, 255, 255), // Set the text color to black
           fontWeight: FontWeight.bold, // You can adjust the font weight
         ),
         child: AnimatedTextKit(

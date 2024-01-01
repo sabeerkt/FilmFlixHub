@@ -1,86 +1,50 @@
-import 'dart:convert';
-
+import 'package:dio/dio.dart';
 import 'package:movie/constant/api_key.dart';
 import 'package:movie/model/mov_model.dart';
 
-import 'package:http/http.dart' as http;
-
 class Api {
-  Future<List<Movie>> getTrending() async {
-    final response = await http.get(Uri.parse(Constants.trendingurl));
-    if (response.statusCode == 200) {
-      final decodedata = json.decode(response.body)['results'] as List;
-      print(decodedata);
-      return decodedata.map((mov) => Movie.fromJson(mov)).toList();
-    } else {
-      throw Exception("somthing happen");
+  Dio dio = Dio();
+
+  Future<List<Movie>> fetchData(String url) async {
+    try {
+      final response = await dio.get(url);
+      if (response.statusCode == 200) {
+        final decodedata = response.data['results'] as List;
+        print(decodedata);
+        return decodedata.map((mov) => Movie.fromJson(mov)).toList();
+      } else {
+        throw Exception("Something went wrong");
+      }
+    } catch (e) {
+      throw Exception("Error: $e");
     }
+  }
+
+  Future<List<Movie>> getTrending() async {
+    return fetchData(Constants.trendingurl);
   }
 
   Future<List<Movie>> getshow() async {
-    final response = await http.get(Uri.parse(Constants.show));
-    if (response.statusCode == 200) {
-      final decodedata = json.decode(response.body)['results'] as List;
-      print(decodedata);
-      return decodedata.map((mov) => Movie.fromJson(mov)).toList();
-    } else {
-      throw Exception("somthing happen");
-    }
+    return fetchData(Constants.show);
   }
 
   Future<List<Movie>> getairtvshow() async {
-    final response = await http.get(Uri.parse(Constants.airtvshow));
-    if (response.statusCode == 200) {
-      final decodedata = json.decode(response.body)['results'] as List;
-      print(decodedata);
-      return decodedata.map((mov) => Movie.fromJson(mov)).toList();
-    } else {
-      throw Exception("somthing happen");
-    }
+    return fetchData(Constants.airtvshow);
   }
 
   Future<List<Movie>> gettopratedTv() async {
-    final response = await http.get(Uri.parse(Constants.topratedTv));
-    if (response.statusCode == 200) {
-      final decodedata = json.decode(response.body)['results'] as List;
-      print(decodedata);
-      return decodedata.map((mov) => Movie.fromJson(mov)).toList();
-    } else {
-      throw Exception("somthing happen");
-    }
+    return fetchData(Constants.topratedTv);
   }
 
   Future<List<Movie>> getpopullar() async {
-    final response = await http.get(Uri.parse(Constants.popullar));
-    if (response.statusCode == 200) {
-      final decodedata = json.decode(response.body)['results'] as List;
-      print(decodedata);
-      return decodedata.map((mov) => Movie.fromJson(mov)).toList();
-    } else {
-      throw Exception("somthing happen");
-    }
+    return fetchData(Constants.popullar);
   }
 
   Future<List<Movie>> getToprated() async {
-    final response = await http.get(Uri.parse(Constants.toprated));
-    print(response.statusCode);
-    if (response.statusCode == 200) {
-      final decodedata = json.decode(response.body)['results'] as List;
-      print(decodedata);
-      return decodedata.map((mov) => Movie.fromJson(mov)).toList();
-    } else {
-      throw Exception("somthing happen");
-    }
+    return fetchData(Constants.toprated);
   }
 
   Future<List<Movie>> getUpcoming() async {
-    final response = await http.get(Uri.parse(Constants.upcoming));
-    if (response.statusCode == 200) {
-      final decodedata = json.decode(response.body)['results'] as List;
-      print(decodedata);
-      return decodedata.map((mov) => Movie.fromJson(mov)).toList();
-    } else {
-      throw Exception("somthing happen");
-    }
+    return fetchData(Constants.upcoming);
   }
 }

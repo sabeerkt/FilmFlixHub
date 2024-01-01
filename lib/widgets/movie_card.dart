@@ -4,7 +4,11 @@ import 'package:movie/model/mov_model.dart';
 import 'package:movie/view/detail.dart';
 
 class MovieCard extends StatelessWidget {
-  MovieCard({super.key, required this.snapshot, required List<Movie> data});
+  MovieCard({
+    super.key,
+    required this.snapshot,
+    required List<Movie> data,
+  });
 
   final AsyncSnapshot snapshot;
 
@@ -12,7 +16,6 @@ class MovieCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 200,
-      width: double.infinity,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
@@ -22,7 +25,6 @@ class MovieCard extends StatelessWidget {
           const double containerSpacing = 10;
 
           return SizedBox(
-            height: 200,
             width: 200 + containerSpacing, // Add spacing to the width
             child: Padding(
               padding: const EdgeInsets.only(
@@ -38,14 +40,18 @@ class MovieCard extends StatelessWidget {
                     ),
                   );
                 },
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      SizedBox(
-                        height: 150,
-                        width: 200,
-                        child: Container(
+                      Expanded(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(12),
+                          ),
                           child: Image.network(
                             "${Constants.imagepath}${snapshot.data[index].posterPath}",
                             filterQuality: FilterQuality.high,
@@ -53,12 +59,11 @@ class MovieCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 50,
-                        width: 200,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: Text(
-                            snapshot.data[index].title, // Add movie name here
+                            snapshot.data[index].title,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               fontSize: 14,

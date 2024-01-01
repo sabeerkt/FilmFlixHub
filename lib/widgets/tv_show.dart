@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movie/constant/api_key.dart';
 import 'package:movie/model/mov_model.dart';
-
 import 'package:movie/view/detail_tv.dart';
 
-class tvCard extends StatelessWidget {
-  tvCard({super.key, required this.snapshot, required List<Movie> data});
+class TvCard extends StatelessWidget {
+  TvCard({super.key, required this.snapshot, required List<Movie> data});
 
   final AsyncSnapshot snapshot;
 
@@ -13,7 +12,6 @@ class tvCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 200,
-      width: double.infinity,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
@@ -23,10 +21,9 @@ class tvCard extends StatelessWidget {
           const double containerSpacing = 10;
 
           return SizedBox(
-            height: 200,
             width: 200 + containerSpacing, // Add spacing to the width
             child: Padding(
-              padding: const EdgeInsets.only(
+              padding: EdgeInsets.only(
                   right: containerSpacing), // Add spacing to the right
               child: GestureDetector(
                 onTap: () {
@@ -39,14 +36,18 @@ class tvCard extends StatelessWidget {
                     ),
                   );
                 },
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      SizedBox(
-                        height: 150,
-                        width: 200,
-                        child: Container(
+                      Expanded(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(12),
+                          ),
                           child: Image.network(
                             "${Constants.imagepath}${snapshot.data[index].posterPath}",
                             filterQuality: FilterQuality.high,
@@ -54,12 +55,11 @@ class tvCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 50,
-                        width: 200,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: Text(
-                            snapshot.data[index].name, // Add movie name here
+                            snapshot.data[index].name,
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               fontSize: 14,

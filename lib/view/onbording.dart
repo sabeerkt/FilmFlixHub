@@ -25,7 +25,7 @@ class OnBoardPage extends StatelessWidget {
                 onPressed: () {
                   // Navigate to the home screen
                   Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => BottomBar()),
+                    MaterialPageRoute(builder: (context) => BottomBarContent()),
                   );
                 },
                 style: ElevatedButton.styleFrom(

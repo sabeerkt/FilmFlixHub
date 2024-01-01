@@ -1,67 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:movie/controller/bottm_provider.dart';
 import 'package:movie/view/home.dart';
 import 'package:movie/view/search.dart';
 import 'package:movie/view/show.dart';
 import 'package:movie/view/tV.dart';
+import 'package:provider/provider.dart';
 
-class BottomBar extends StatefulWidget {
-  const BottomBar({Key? key}) : super(key: key);
 
-  @override
-  State<BottomBar> createState() => _BottomBarState();
-}
 
-class _BottomBarState extends State<BottomBar> {
-  int _currentIndex = 0;
 
-  final List<Widget> bottomBarPages = [
-    const Home(),
-    const search(),
-    const tV(),
-     ShowPage(),
-  ];
-
+class BottomBarContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<BottomBarProvider>(context);
+
     return Scaffold(
       body: IndexedStack(
-        index: _currentIndex,
-        children: bottomBarPages,
+        index: provider.currentIndex,
+        children:  [
+          Home(),
+          search(),
+          tV(),
+          ShowPage(),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        currentIndex: _currentIndex,
-        onTap: (i) => setState(() => _currentIndex = i),
+        currentIndex: provider.currentIndex,
+        onTap: (i) => provider.setIndex(i),
+        backgroundColor: Colors.white,
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         items: const [
           BottomNavigationBarItem(
             label: "Home",
             icon: Icon(
               Icons.home_sharp,
-            
-
-              color: Color.fromARGB(255, 85, 84, 84),
             ),
           ),
           BottomNavigationBarItem(
-            label: "search",
+            label: "Search",
             icon: Icon(
               Icons.search,
-              color: Color.fromARGB(255, 85, 84, 84),
             ),
           ),
-          
           BottomNavigationBarItem(
-            label: "tV",
+            label: "TV",
             icon: Icon(
               Icons.tab,
-              color: Color.fromARGB(255, 85, 84, 84),
             ),
           ),
           BottomNavigationBarItem(
-            label: "show",
+            label: "Show",
             icon: Icon(
-             Icons.movie,
-              color: Color.fromARGB(255, 85, 84, 84),
+              Icons.movie,
             ),
           ),
         ],

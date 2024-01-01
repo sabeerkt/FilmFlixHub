@@ -1,112 +1,125 @@
 import 'package:flutter/material.dart';
+import 'package:movie/constant/api_key.dart';
+import 'package:movie/controller/api_provider.dart';
 import 'package:movie/services/api.dart';
 import 'package:movie/model/mov_model.dart';
-
 import 'package:movie/widgets/tv_show.dart';
+import 'package:provider/provider.dart';
 
 class tV extends StatefulWidget {
-  const tV({super.key});
+  const tV({Key? key}) : super(key: key);
 
   @override
   State<tV> createState() => _tVState();
 }
 
-late Future<List<Movie>> popullar;
-late Future<List<Movie>> topratedTv;
-late Future<List<Movie>> airshow;
-
 class _tVState extends State<tV> {
-  void initState() {
-    super.initState();
-    popullar = Api().getpopullar();
-    topratedTv = Api().gettopratedTv();
-    airshow = Api().getairtvshow();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("tv"),
+        title: Text("TV"),
+        backgroundColor: Colors.black,
       ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text("popular tv show"),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                child: FutureBuilder(
-                  future: popullar,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text(snapshot.error.toString()),
-                      );
-                    } else if (snapshot.hasData) {
-                      final data = snapshot.data as List<Movie>;
-                      return tvCard(
-                        data: data,
-                        snapshot: snapshot,
-                      ); // Pass the data to the widget
-                    } else {
-                      return const CircularProgressIndicator();
-                    }
-                  },
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.black, Colors.pink[900]!],
+          ),
+        ),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text("Popular TV Shows", style: TextStyle(color: Colors.white)),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  child: FutureBuilder(
+                    future: Provider.of<ApiProvider>(context, listen: false)
+                        .getMOvies(Constants.popullar),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Center(
+                          child: Text(
+                            snapshot.error.toString(),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        );
+                      } else if (snapshot.hasData) {
+                        final data = snapshot.data as List<Movie>;
+                        return TvCard(
+                          data: data,
+                          snapshot: snapshot,
+                        );
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    },
+                  ),
                 ),
               ),
-            ),
-            const Text("top rated tv show"),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                child: FutureBuilder(
-                  future: topratedTv,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text(snapshot.error.toString()),
-                      );
-                    } else if (snapshot.hasData) {
-                      final data = snapshot.data as List<Movie>;
-                      return tvCard(
-                        data: data,
-                        snapshot: snapshot,
-                      ); // Pass the data to the widget
-                    } else {
-                      return const CircularProgressIndicator();
-                    }
-                  },
+              const Text("Top Rated TV Shows", style: TextStyle(color: Colors.white)),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  child: FutureBuilder(
+                    future: Provider.of<ApiProvider>(context, listen: false)
+                        .getMOvies(Constants.topratedTv),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Center(
+                          child: Text(
+                            snapshot.error.toString(),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        );
+                      } else if (snapshot.hasData) {
+                        final data = snapshot.data as List<Movie>;
+                        return TvCard(
+                          data: data,
+                          snapshot: snapshot,
+                        );
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    },
+                  ),
                 ),
               ),
-            ),
-            const Text("on the air tv show"),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                child: FutureBuilder(
-                  future: airshow,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text(snapshot.error.toString()),
-                      );
-                    } else if (snapshot.hasData) {
-                      final data = snapshot.data as List<Movie>;
-                      return tvCard(
-                        data: data,
-                        snapshot: snapshot,
-                      ); // Pass the data to the widget
-                    } else {
-                      return const CircularProgressIndicator();
-                    }
-                  },
+              const Text("On the Air TV Shows", style: TextStyle(color: Colors.white)),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  child: FutureBuilder(
+                    future: Provider.of<ApiProvider>(context, listen: false)
+                        .getMOvies(Constants.airtvshow),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Center(
+                          child: Text(
+                            snapshot.error.toString(),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        );
+                      } else if (snapshot.hasData) {
+                        final data = snapshot.data as List<Movie>;
+                        return TvCard(
+                          data: data,
+                          snapshot: snapshot,
+                        );
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    },
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
