@@ -29,15 +29,16 @@ class MyCarouselSlider extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => DetailPage(
                     movie: snapshot.data[index],
+                    id: snapshot.data[index].id,
                   ),
                 ),
               );
             },
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(10),
               child: Container(
-                height: 250,
-                width: 180,
+                height: 200,
+                width: 250,
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(

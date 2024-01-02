@@ -31,7 +31,7 @@ class ShowPage extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.black, Colors.pink[900]!],
+            colors: [Colors.black, const Color.fromARGB(255, 0, 0, 0)!],
           ),
         ),
         child: SingleChildScrollView(
@@ -39,10 +39,6 @@ class ShowPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Popular TV Shows",
-                style: TextStyle(fontSize: 25, color: Colors.white),
-              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(

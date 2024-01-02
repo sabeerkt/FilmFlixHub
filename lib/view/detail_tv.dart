@@ -14,7 +14,7 @@ class DetailPageTv extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.pink, Colors.black],
+            colors: [Color.fromARGB(255, 0, 0, 0), Colors.black],
           ),
         ),
         child: CustomScrollView(

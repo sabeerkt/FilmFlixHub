@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie/constant/api_key.dart';
 import 'package:movie/controller/api_provider.dart';
-import 'package:movie/services/api.dart';
+
 import 'package:movie/model/mov_model.dart';
 import 'package:movie/widgets/tv_show.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +30,7 @@ class tV extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.black, Colors.pink[900]!],
+            colors: [Colors.black, const Color.fromARGB(255, 0, 0, 0)!],
           ),
         ),
         child: SingleChildScrollView(
@@ -38,8 +38,12 @@ class tV extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("Popular TV Shows",
-                  style: TextStyle(color: Colors.white)),
+              const Center(
+                child: Text(
+                  "Popular TV Shows ",
+                  style: TextStyle(fontSize: 15, color: Colors.white),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
@@ -67,8 +71,12 @@ class tV extends StatelessWidget {
                   ),
                 ),
               ),
-              const Text("Top Rated TV Shows",
-                  style: TextStyle(color: Colors.white)),
+              const Center(
+                child: Text(
+                  "Top Rated TV Shows ",
+                  style: TextStyle(fontSize: 15, color: Colors.white),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
@@ -96,8 +104,12 @@ class tV extends StatelessWidget {
                   ),
                 ),
               ),
-              const Text("On the Air TV Shows",
-                  style: TextStyle(color: Colors.white)),
+              const Center(
+                child: Text(
+                  "On the Air TV Shows ",
+                  style: TextStyle(fontSize: 15, color: Colors.white),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(

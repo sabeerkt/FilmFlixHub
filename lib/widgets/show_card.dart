@@ -29,7 +29,7 @@ class ShowCard extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => DetailPage(
-                      movie: snapshot.data![index],
+                      movie: snapshot.data![index], id: snapshot.data![index].id!,
                     ),
                   ),
                 );

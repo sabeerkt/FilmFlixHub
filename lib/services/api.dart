@@ -1,5 +1,9 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
 import 'package:movie/constant/api_key.dart';
+import 'package:movie/model/cast_model.dart';
 import 'package:movie/model/mov_model.dart';
 
 class Api {
@@ -47,21 +51,52 @@ class Api {
   Future<List<Movie>> getUpcoming() async {
     return fetchData(Constants.upcoming);
   }
-   Future<List<Movie>> searchMovie({required searchurl}) async {
+  //cast
+  Future<List<CastModel>> getCast(
+      {required castUrl, required BuildContext context}) async {
     try {
-      final response = await dio.get(searchurl);
+      final response = await dio.get(castUrl);
       if (response.statusCode == 200) {
-        final Map<String, dynamic> searchdata = response.data;
-        final List<dynamic> searchmovies = searchdata["results"];
-        return searchmovies
-            .map((search) => Movie.fromJson(search))
-            .toList();
+        final Map<String, dynamic> data = response.data;
+        if (data.containsKey("cast")) {
+          final List<dynamic> results = data["cast"];
+          return results.map((cast) => CastModel.fromJson(cast)).toList();
+        } else {
+          throw Exception('No "cast" key in response');
+        }
       } else {
-        print('function error');
+       // log("${response.statusCode}");
+        // throw Exception('Error function - Status Code: ${response.statusCode}');
         return [];
       }
     } catch (e) {
-      print("unable to fetch data:-${e}");
+      // throw Exception(e); 
+      // Dialogs.showSnackbar(context, 'Failed in get cast');
+      return [];
+      // return [];
+    }
+  }
+
+  Future<List<Movie>> searchMovie({required String searchurl}) async {
+    try {
+      final response = await dio.get(searchurl);
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> searchdata = response.data;
+        final List<dynamic> searchmovies = searchdata["results"];
+        return searchmovies.map((search) => Movie.fromJson(search)).toList();
+      } else {
+        // Handle non-200 status codes
+        print('Error: ${response.statusCode} - ${response.statusMessage}');
+        return [];
+      }
+    } on DioError catch (e) {
+      // Handle Dio errors, like network issues, timeouts, etc.
+      print('Dio Error: ${e.message}');
+      return [];
+    } catch (e) {
+      // Handle other exceptions
+      print("Error: $e");
       return [];
     }
   }

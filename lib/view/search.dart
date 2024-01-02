@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/constant/api_key.dart';
 import 'package:movie/controller/search_provider.dart';
 import 'package:movie/view/detail.dart';
-
+import 'package:lottie/lottie.dart'; // Import the lottie package
 import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -18,7 +18,6 @@ class _SearchScreenState extends State<SearchScreen> {
     final searchcontroller = Provider.of<SearchProvider>(context);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black,
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -28,7 +27,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   onChanged: (value) {
                     searchcontroller.searchMovies(value);
                   },
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
                   controller: searchcontroller.queryController,
                   decoration: InputDecoration(
                     hintText: 'Search ',
@@ -41,50 +40,55 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 900,
-                child: searchcontroller.searchResults.isEmpty
-                    ? const Center(
-                        child: Text(
-                          'Search Anything',
-                          style: TextStyle(color: Colors.red),
-                        ),
-                      )
-                    : GridView.builder(
-                        itemCount: searchcontroller.searchResults.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                mainAxisSpacing: 8,
-                                crossAxisSpacing: 8,
-                                crossAxisCount: 3,
-                                childAspectRatio: 1 / 1.4),
-                        itemBuilder: (context, index) {
-                          final searchdata =
-                              searchcontroller.searchResults[index];
+              Center(
+                child: SizedBox(
+                  height: 400,
+                  child: searchcontroller.searchResults.isEmpty
+                      ? Center(
+                          // Use Lottie animation instead of text
+                          child: Lottie.asset(
+                            'assets/search.json', // Replace with your Lottie animation file path
+                            width: 200,
+                            height: 200,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      : GridView.builder(
+                          itemCount: searchcontroller.searchResults.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  mainAxisSpacing: 8,
+                                  crossAxisSpacing: 8,
+                                  crossAxisCount: 3,
+                                  childAspectRatio: 1 / 1.4),
+                          itemBuilder: (context, index) {
+                            final searchdata =
+                                searchcontroller.searchResults[index];
 
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => DetailPage(
-                                        movie: searchdata,
-                                      )));
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.white),
-                                    image: DecorationImage(
-                                        image: NetworkImage(
-                                            "${Constants.imagepath}${searchdata.posterPath}"),
-                                        fit: BoxFit.fill,
-                                        filterQuality: FilterQuality.high),
-                                    color: Colors.black.withOpacity(0.2),
-                                    borderRadius: BorderRadius.circular(20)),
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => DetailPage(
+                                          movie: searchdata, id: searchdata.id!
+                                        )));
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.white),
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              "${Constants.imagepath}${searchdata.posterPath}"),
+                                          fit: BoxFit.fill,
+                                          filterQuality: FilterQuality.high),
+                                      color: Colors.black.withOpacity(0.2),
+                                      borderRadius: BorderRadius.circular(20)),
+                                ),
                               ),
-                            ),
-                          );
-                        }),
+                            );
+                          }),
+                ),
               )
             ],
           ),

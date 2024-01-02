@@ -24,7 +24,7 @@ class Home extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.black, Colors.pink[900]!],
+            colors: [Colors.black, Color.fromARGB(255, 0, 0, 0)!],
           ),
         ),
         child: SingleChildScrollView(
@@ -63,9 +63,11 @@ class Home extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
-                "Top Rated Movies",
-                style: TextStyle(color: Colors.white),
+              const Center(
+                child: Text(
+                  "Top Rated Movies ",
+                  style: TextStyle(fontSize: 15, color: Colors.white),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -94,9 +96,11 @@ class Home extends StatelessWidget {
                   ),
                 ),
               ),
-              const Text(
-                "Upcoming Movies",
-                style: TextStyle(color: Colors.white),
+              const Center(
+                child: Text(
+                  "Upcoming Movies ",
+                  style: TextStyle(fontSize: 15, color: Colors.white),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

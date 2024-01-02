@@ -36,6 +36,7 @@ class MovieCard extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => DetailPage(
                         movie: snapshot.data[index],
+                        id: snapshot.data[index].id,
                       ),
                     ),
                   );
@@ -50,7 +51,7 @@ class MovieCard extends StatelessWidget {
                       Expanded(
                         child: ClipRRect(
                           borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(12),
+                            top: Radius.circular(10),
                           ),
                           child: Image.network(
                             "${Constants.imagepath}${snapshot.data[index].posterPath}",
@@ -60,7 +61,7 @@ class MovieCard extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(5),
                         child: Center(
                           child: Text(
                             snapshot.data[index].title,
