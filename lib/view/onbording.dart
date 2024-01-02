@@ -12,7 +12,7 @@ class OnBoardPage extends StatelessWidget {
         children: [
           Image.asset(
             'assets/spiderman.jpg',
-            fit: BoxFit.cover, // Ensure the image covers the entire screen
+            fit: BoxFit.cover,
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -21,24 +21,30 @@ class OnBoardPage extends StatelessWidget {
               const SizedBox(
                 height: 80,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  // Navigate to the home screen
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => BottomBarContent()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.black, // Dark button color
-                  onPrimary: Colors.white, // White text color
-                  padding: EdgeInsets.symmetric(horizontal: 20), // Medium width
-                ),
-                child: Text(
-                  "Login",
-                  style: TextStyle(fontSize: 40),
-                ),
-              ),
             ],
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 20, // Adjust the bottom margin as needed
+            child: 
+            
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => BottomBarContent()),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.black,
+                onPrimary: Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 20),
+              ),
+              child: Text(
+                "Login",
+                style: TextStyle(fontSize: 40),
+              ),
+            ),
           ),
         ],
       ),

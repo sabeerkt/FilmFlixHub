@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
 import 'package:movie/constant/api_key.dart';
 import 'package:movie/model/cast_model.dart';
 import 'package:movie/model/mov_model.dart';
@@ -12,6 +11,7 @@ class DetailPage extends StatelessWidget {
     required this.movie,
     required this.id,
   }) : super(key: key);
+
   final Movie movie;
   int id;
 
@@ -72,6 +72,57 @@ class DetailPage extends StatelessWidget {
                 ),
               ),
             ),
+            // Move the cast widget to the top
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 130,
+                child: FutureBuilder(
+                  future: Api().getCast(
+                    castUrl:
+                        'https://api.themoviedb.org/3/movie/$id/credits?api_key=aa9a8a205c0591e06a5292b3c1835f3a',
+                    context: context,
+                  ),
+                  builder: (context, AsyncSnapshot<List<CastModel>> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text("Error: ${snapshot.error}");
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return const Text("No data available");
+                    } else {
+                      return ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          CastModel casts = snapshot.data![index];
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 12),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: CircleAvatar(
+                                      radius: 45,
+                                      backgroundImage: NetworkImage(
+                                        '${Constants.imagepath}${casts.profilePath!}',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Text(casts.name!),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    }
+                  },
+                ),
+              ),
+            ),
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(12),
@@ -112,10 +163,12 @@ class DetailPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        // Change the design of the release date
                         Text(
                           "Release Date: ${movie.releaseDate ?? "Unknown"}",
                           style: const TextStyle(
-                            fontSize: 16,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                             color: Colors.white,
                             shadows: [
                               Shadow(
@@ -126,12 +179,14 @@ class DetailPage extends StatelessWidget {
                             ],
                           ),
                         ),
+                        // Change the design of the rating
                         Row(
                           children: [
                             const Text(
                               "Rating: ",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
                                 color: Colors.white,
                                 shadows: [
                                   Shadow(
@@ -143,11 +198,12 @@ class DetailPage extends StatelessWidget {
                               ),
                             ),
                             const Icon(Icons.star,
-                                color: Colors.amber, size: 20),
+                                color: Colors.amber, size: 24),
                             Text(
                               "${movie.voteAverage?.toStringAsFixed(1)}/10",
                               style: const TextStyle(
-                                fontSize: 16,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
                                 color: Colors.white,
                                 shadows: [
                                   Shadow(
@@ -160,64 +216,9 @@ class DetailPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Expanded(
-                          child: FutureBuilder(
-                            future: Api().getCast(
-                              castUrl:
-                                  'https://api.themoviedb.org/3/movie/$id/credits?api_key=aa9a8a205c0591e06a5292b3c1835f3a',
-                              context: context,
-                            ),
-                            builder: (context,
-                                AsyncSnapshot<List<CastModel>> snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const CircularProgressIndicator();
-                              } else if (snapshot.hasError) {
-                                return Text("Error: ${snapshot.error}");
-                              } else if (!snapshot.hasData ||
-                                  snapshot.data!.isEmpty) {
-                                return const Text("No data available");
-                              } else {
-                                return SizedBox(
-                                  height: 130,
-                                  child: ListView.builder(
-                                    itemCount: snapshot.data!.length,
-                                    scrollDirection: Axis.horizontal,
-                                    physics: const BouncingScrollPhysics(),
-                                    itemBuilder: (context, index) {
-                                      CastModel casts = snapshot.data![index];
-                                      return Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10),
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 12),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(2.0),
-                                                child: CircleAvatar(
-                                                  radius: 45,
-                                                  backgroundImage: NetworkImage(
-                                                    '${Constants.imagepath}${casts.profilePath!}',
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Text(casts.name!),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                );
-                              }
-                            },
-                          ),
-                        ),
                       ],
                     ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),

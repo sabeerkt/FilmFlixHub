@@ -10,7 +10,6 @@ class TvCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SizedBox(
       height: 250,
       child: ListView.builder(
@@ -25,8 +24,7 @@ class TvCard extends StatelessWidget {
             width: 200 + containerSpacing, // Add spacing to the width
             child: Padding(
               padding: EdgeInsets.only(
-                  right: containerSpacing
-                  ), // Add spacing to the right
+                  right: containerSpacing), // Add spacing to the right
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -34,6 +32,7 @@ class TvCard extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => DetailPageTv(
                         movie: snapshot.data[index],
+                        id: snapshot.data![index].id!,
                       ),
                     ),
                   );

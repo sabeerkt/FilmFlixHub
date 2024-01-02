@@ -31,8 +31,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   controller: searchcontroller.queryController,
                   decoration: InputDecoration(
                     hintText: 'Search ',
-                    hintStyle: const TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255)),
+                    hintStyle:
+                        const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
                     prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -69,8 +69,8 @@ class _SearchScreenState extends State<SearchScreen> {
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => DetailPage(
-                                          movie: searchdata, id: searchdata.id!
-                                        )));
+                                        movie: searchdata,
+                                        id: searchdata.id!)));
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(5),
