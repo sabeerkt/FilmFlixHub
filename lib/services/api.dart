@@ -51,6 +51,7 @@ class Api {
         final Map<String, dynamic> data = response.data;
         if (data.containsKey("cast")) {
           final List<dynamic> results = data["cast"];
+          //itrete cast model pas sto result 
           return results.map((cast) => CastModel.fromJson(cast)).toList();
         } else {
           throw Exception('No "cast" key in response');

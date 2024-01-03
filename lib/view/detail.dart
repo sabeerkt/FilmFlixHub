@@ -104,15 +104,17 @@ class DetailPage extends StatelessWidget {
                                   padding: const EdgeInsets.only(left: 12),
                                   child: Padding(
                                     padding: const EdgeInsets.all(2.0),
-                                    child: CircleAvatar(
-                                      radius: 45,
-                                      backgroundImage: NetworkImage(
-                                        '${Constants.imagepath}${casts.profilePath!}',
-                                      ),
+                                    child: Image.network(
+                                      '${Constants.imagepath}${casts.profilePath!}',
+                                      width: 90, // Adjust the width as needed
+                                      height: 90, // Adjust the height as needed
+                                      fit: BoxFit
+                                          .cover, // Adjust the BoxFit property as needed
                                     ),
                                   ),
                                 ),
-                                Text(casts.name!),
+                                Text(casts.name!,
+                                    style: TextStyle(color: Colors.white)),
                               ],
                             ),
                           );
