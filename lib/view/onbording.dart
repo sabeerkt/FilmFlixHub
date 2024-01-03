@@ -11,7 +11,7 @@ class OnBoardPage extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Image.asset(
-            'assets/spalsh.jpg',
+            'assets/1.jpg',
             fit: BoxFit.cover,
           ),
           Column(
@@ -34,13 +34,19 @@ class OnBoardPage extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(255, 0, 0, 0),
-                onPrimary: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                      10.0), // Adjust the radius as needed
+                ),
+                elevation: 5.0, // Add some elevation for a subtle shadow effect
+                primary: Color.fromARGB(255, 255, 255, 255),
+                onPrimary: const Color.fromARGB(255, 0, 0, 0),
                 padding: EdgeInsets.symmetric(horizontal: 20),
               ),
               child: Text(
                 "Login",
-                style: TextStyle(fontSize: 40),
+                style:
+                    TextStyle(fontSize: 24), // Adjust the font size as needed
               ),
             ),
           ),
