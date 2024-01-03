@@ -11,7 +11,7 @@ class OnBoardPage extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Image.asset(
-            'assets/spiderman.jpg',
+            'assets/spalsh.jpg',
             fit: BoxFit.cover,
           ),
           Column(
@@ -24,19 +24,17 @@ class OnBoardPage extends StatelessWidget {
             ],
           ),
           Positioned(
-            left: 0,
-            right: 0,
+            left: 20,
+            right: 20,
             bottom: 20, // Adjust the bottom margin as needed
-            child: 
-            
-            ElevatedButton(
+            child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => BottomBarContent()),
                 );
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.black,
+                primary: Color.fromARGB(255, 0, 0, 0),
                 onPrimary: Colors.white,
                 padding: EdgeInsets.symmetric(horizontal: 20),
               ),

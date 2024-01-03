@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/constant/api_key.dart';
@@ -7,15 +5,18 @@ import 'package:movie/model/cast_model.dart';
 import 'package:movie/model/mov_model.dart';
 
 class Api {
-  Dio dio = Dio();
+  final Dio dio = Dio();
 
   Future<List<Movie>> fetchData(String url) async {
     try {
       final response = await dio.get(url);
+
       if (response.statusCode == 200) {
-        final decodedata = response.data['results'] as List;
-        print(decodedata);
-        return decodedata.map((mov) => Movie.fromJson(mov)).toList();
+        final decodedData = (response.data['results'] as List)
+            .map((mov) => Movie.fromJson(mov))
+            .toList();
+        print(decodedData);
+        return decodedData;
       } else {
         throw Exception("Something went wrong");
       }
@@ -24,38 +25,28 @@ class Api {
     }
   }
 
-  Future<List<Movie>> getTrending() async {
-    return fetchData(Constants.trendingurl);
-  }
+  Future<List<Movie>> getTrending() async => fetchData(Constants.trendingurl);
 
-  Future<List<Movie>> getshow() async {
-    return fetchData(Constants.show);
-  }
+  Future<List<Movie>> getShow() async => fetchData(Constants.show);
 
-  Future<List<Movie>> getairtvshow() async {
-    return fetchData(Constants.airtvshow);
-  }
+  Future<List<Movie>> getAirtvshow() async => fetchData(Constants.airtvshow);
 
-  Future<List<Movie>> gettopratedTv() async {
-    return fetchData(Constants.topratedTv);
-  }
+  Future<List<Movie>> getTopRatedTv() async =>
+      fetchData(Constants.topratedTv);
 
-  Future<List<Movie>> getpopullar() async {
-    return fetchData(Constants.popullar);
-  }
+  Future<List<Movie>> getPopullar() async => fetchData(Constants.popullar);
 
-  Future<List<Movie>> getToprated() async {
-    return fetchData(Constants.toprated);
-  }
+  Future<List<Movie>> getTopRated() async => fetchData(Constants.toprated);
 
-  Future<List<Movie>> getUpcoming() async {
-    return fetchData(Constants.upcoming);
-  }
-  //cast
-  Future<List<CastModel>> getCast(
-      {required castUrl, required BuildContext context}) async {
+  Future<List<Movie>> getUpcoming() async => fetchData(Constants.upcoming);
+
+  Future<List<CastModel>> getCast({
+    required String castUrl,
+    required BuildContext context,
+  }) async {
     try {
       final response = await dio.get(castUrl);
+
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = response.data;
         if (data.containsKey("cast")) {
@@ -65,26 +56,25 @@ class Api {
           throw Exception('No "cast" key in response');
         }
       } else {
-       // log("${response.statusCode}");
+        // log("${response.statusCode}");
         // throw Exception('Error function - Status Code: ${response.statusCode}');
         return [];
       }
     } catch (e) {
-      // throw Exception(e); 
+      // throw Exception(e);
       // Dialogs.showSnackbar(context, 'Failed in get cast');
       return [];
-      // return [];
     }
   }
 
-  Future<List<Movie>> searchMovie({required String searchurl}) async {
+  Future<List<Movie>> searchMovie({required String searchUrl}) async {
     try {
-      final response = await dio.get(searchurl);
+      final response = await dio.get(searchUrl);
 
       if (response.statusCode == 200) {
-        final Map<String, dynamic> searchdata = response.data;
-        final List<dynamic> searchmovies = searchdata["results"];
-        return searchmovies.map((search) => Movie.fromJson(search)).toList();
+        final Map<String, dynamic> searchData = response.data;
+        final List<dynamic> searchMovies = searchData["results"];
+        return searchMovies.map((search) => Movie.fromJson(search)).toList();
       } else {
         // Handle non-200 status codes
         print('Error: ${response.statusCode} - ${response.statusMessage}');

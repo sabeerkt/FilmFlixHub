@@ -18,6 +18,7 @@ class _SearchScreenState extends State<SearchScreen> {
     final searchcontroller = Provider.of<SearchProvider>(context);
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.black,
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -27,15 +28,31 @@ class _SearchScreenState extends State<SearchScreen> {
                   onChanged: (value) {
                     searchcontroller.searchMovies(value);
                   },
-                  style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                  style: const TextStyle(
+                      color: Color.fromARGB(255, 255, 255, 255)),
                   controller: searchcontroller.queryController,
                   decoration: InputDecoration(
                     hintText: 'Search ',
-                    hintStyle:
-                        const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                    hintStyle: const TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255)),
                     prefixIcon: const Icon(Icons.search),
-                    border: OutlineInputBorder(
+                    suffixIcon: searchcontroller.queryController.text.isNotEmpty
+                        ? IconButton(
+                            color: Colors.red,
+                            icon: const Icon(Icons.clear),
+                            onPressed: () {
+                              searchcontroller.queryController.clear();
+                              searchcontroller.searchMovies('');
+                            },
+                          )
+                        : null,
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
+                      borderSide: const BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: const BorderSide(color: Colors.white),
                     ),
                   ),
                 ),

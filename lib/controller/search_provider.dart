@@ -13,7 +13,7 @@ class SearchProvider extends ChangeNotifier {
         final searchUrl =
             "https://api.themoviedb.org/3/search/movie?query=$query&api_key=aa9a8a205c0591e06a5292b3c1835f3a";
         List<Movie> movies =
-            await service.searchMovie(searchurl: searchUrl);
+            await service.searchMovie(searchUrl: searchUrl);
 
         searchResults = movies;
         notifyListeners();
