@@ -17,6 +17,6 @@ class Constants {
 
   static const upcoming =
       'https://api.themoviedb.org/3/discover/movie?primary_release_year=2024&api_key=$apiKey';
-      static const castPoint = "/credits?";                                   
+                                     
 }
 

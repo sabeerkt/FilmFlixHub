@@ -9,12 +9,14 @@ class Api {
 
   Future<List<Movie>> fetchData(String url) async {
     try {
+      //varible 
       final response = await dio.get(url);
 
       if (response.statusCode == 200) {
         final decodedData = (response.data['results'] as List)
             .map((mov) => Movie.fromJson(mov))
             .toList();
+            //itrrate 
         print(decodedData);
         return decodedData;
       } else {
@@ -31,8 +33,7 @@ class Api {
 
   Future<List<Movie>> getAirtvshow() async => fetchData(Constants.airtvshow);
 
-  Future<List<Movie>> getTopRatedTv() async =>
-      fetchData(Constants.topratedTv);
+  Future<List<Movie>> getTopRatedTv() async => fetchData(Constants.topratedTv);
 
   Future<List<Movie>> getPopullar() async => fetchData(Constants.popullar);
 
@@ -51,7 +52,7 @@ class Api {
         final Map<String, dynamic> data = response.data;
         if (data.containsKey("cast")) {
           final List<dynamic> results = data["cast"];
-          //itrete cast model pas sto result 
+          //itrete cast model pas sto result
           return results.map((cast) => CastModel.fromJson(cast)).toList();
         } else {
           throw Exception('No "cast" key in response');
