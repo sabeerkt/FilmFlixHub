@@ -63,6 +63,49 @@ class Home extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Now Playing",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: FutureBuilder(
+                        future: Provider.of<ApiProvider>(context, listen: false)
+                            .getMOvies(Constants.nowPlaying),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) {
+                            return Center(
+                              child: Text(
+                                snapshot.error.toString(),
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            );
+                          } else if (snapshot.hasData) {
+                            final data = snapshot.data as List<Movie>;
+                            return MovieCard(
+                              data: data,
+                              snapshot: snapshot,
+                            );
+                          } else {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               const Center(
                 child: Text(
                   "Top Rated Movies ",

@@ -14,7 +14,8 @@ class Constants {
       'https://api.themoviedb.org/3/movie/top_rated?api_key=$apiKey';
   static const topratedTv =
       'https://api.themoviedb.org/3/tv/top_rated?api_key=$apiKey';
-
+static const nowPlaying =
+      'https://api.themoviedb.org/3/movie/now_playing?api_key=$apiKey';
   static const upcoming =
       'https://api.themoviedb.org/3/discover/movie?primary_release_year=2024&api_key=$apiKey';
                                      
